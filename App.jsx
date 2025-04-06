@@ -6,6 +6,9 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {COLORS} from './src/utils/Theme';
 
 const App = () => {
+  if (__DEV__) {
+    require('./ReactotronConfig');
+  }
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <GestureHandlerRootView>
