@@ -2,7 +2,6 @@
  * Centralized API client configuration using axios
  */
 import axios from 'axios';
-import Config from 'react-native-config';
 
 // Create axios instance with default config
 const apiClient = axios.create({

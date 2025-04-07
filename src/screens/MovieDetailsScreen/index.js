@@ -20,6 +20,7 @@ import SkeletonLoader from '../../components/common/skeletons/SkeletonLoader';
 import {formatRuntime, getDate} from '../../utils/AppUtils';
 import GenreView from '../../components/common/detailsScreen/GenreView';
 import CharactersList from '../../components/common/detailsScreen/CharacterList';
+import FavoriteButton from '../../components/common/FavoriteButton';
 
 const MovieDetailsScreen = props => {
   const movie = props.route.params.movie;
@@ -79,6 +80,11 @@ const MovieDetailsScreen = props => {
                 ]}
               />
             )}
+            <FavoriteButton
+              movie={movie}
+              style={styles.favBtn}
+              size={SIZES.xxLarge}
+            />
             <Gradient
               showTopGradient
               bottomGradStyle={styles.bannerImgBottomGradient}

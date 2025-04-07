@@ -42,12 +42,16 @@ const Upcoming = () => {
 
   return (
     <View style={{flex: 1}}>
-      <MovieList
-        isLoading={isLoading}
-        movieData={data}
-        onEndReachedHandler={onEndReachedHandler}
-        paginationLoader={paginationLoader}
-      />
+      {error ? (
+        <ErrorView message={error} onRetry={() => fetchNowPlayingData(1)} />
+      ) : (
+        <MovieList
+          isLoading={isLoading}
+          movieData={data}
+          onEndReachedHandler={onEndReachedHandler}
+          paginationLoader={paginationLoader}
+        />
+      )}
     </View>
   );
 };

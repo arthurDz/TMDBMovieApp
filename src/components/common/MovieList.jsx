@@ -36,44 +36,33 @@ const MovieList = ({
   return (
     <Animated.View style={[styles.contentCont]}>
       <View style={{alignSelf: 'center'}}>
-        {/* {isLoading ? (
+        {isLoading ? (
+          <ActivityIndicator
+            size={'large'}
+            color={COLORS['Neutrals/neutrals-1']}
+          />
+        ) : (
           <Animated.FlatList
-            data={Array.from({length: 20}, (_, index) => index)}
-            numColumns={1}
-            renderItem={() =>
-              isList ? (
-                <AnimeCardDetailViewSkeleton />
-              ) : (
-                <BrowseAnimeCardSkeleton />
-              )
-            }
+            data={movieData}
             keyExtractor={(item, index) => index}
+            numColumns={Math.floor(width / (width / 2.2))}
+            renderItem={({item, index}) => (
+              <MovieListCard item={item} index={index} />
+            )}
             initialNumToRender={10}
             maxToRenderPerBatch={11}
-            contentContainerStyle={{flexGrow: 1}}
+            scrollEventThrottle={16}
+            contentContainerStyle={{
+              flexGrow: 1,
+              gap: moderateScale(16),
+              paddingBottom: verticalScale(55),
+            }}
+            onEndReached={onEndReachedHandler}
+            onEndReachedThreshold={0}
+            ListFooterComponent={renderLoader}
+            ListEmptyComponent={emptyComponent}
           />
-        ) : ( */}
-        <Animated.FlatList
-          data={movieData}
-          keyExtractor={(item, index) => index}
-          numColumns={Math.floor(width / (width / 2.2))}
-          renderItem={({item, index}) => (
-            <MovieListCard item={item} index={index} />
-          )}
-          initialNumToRender={10}
-          maxToRenderPerBatch={11}
-          scrollEventThrottle={16}
-          contentContainerStyle={{
-            flexGrow: 1,
-            gap: moderateScale(16),
-            paddingBottom: verticalScale(55),
-          }}
-          onEndReached={onEndReachedHandler}
-          onEndReachedThreshold={0}
-          ListFooterComponent={renderLoader}
-          ListEmptyComponent={emptyComponent}
-        />
-        {/* )} */}
+        )}
       </View>
     </Animated.View>
   );

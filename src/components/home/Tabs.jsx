@@ -1,18 +1,11 @@
-import {StyleSheet, useWindowDimensions} from 'react-native';
+import {ActivityIndicator, StyleSheet, useWindowDimensions} from 'react-native';
 import React from 'react';
+import {TabBar, TabView} from 'react-native-tab-view';
 import NowPlaying from './Sections/NowPlaying';
-import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 import Popular from './Sections/Popular';
 import TopRated from './Sections/TopRated';
 import Upcoming from './Sections/Upcoming';
 import {COLORS} from '../../utils/Theme';
-
-const renderScene = SceneMap({
-  first: NowPlaying,
-  second: Popular,
-  third: TopRated,
-  fourth: Upcoming,
-});
 
 const routes = [
   {key: 'first', title: 'Now Playing'},
@@ -20,6 +13,21 @@ const routes = [
   {key: 'third', title: 'Top Rated'},
   {key: 'fourth', title: 'Upcoming'},
 ];
+
+const renderScene = ({route}) => {
+  switch (route.key) {
+    case 'first':
+      return <NowPlaying />;
+    case 'second':
+      return <Popular />;
+    case 'third':
+      return <TopRated />;
+    case 'fourth':
+      return <Upcoming />;
+    default:
+      return null;
+  }
+};
 
 const Tabs = () => {
   const layout = useWindowDimensions();
@@ -39,6 +47,8 @@ const Tabs = () => {
       initialLayout={{width: layout.width}}
       swipeEnabled={false}
       renderTabBar={renderTabBar}
+      lazy
+      renderLazyPlaceholder={() => <ActivityIndicator size="large" />}
     />
   );
 };

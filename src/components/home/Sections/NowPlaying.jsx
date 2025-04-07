@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {getNowPlayingMovies} from '../../../api/tmdbApi';
 import MovieList from '../../common/MovieList';
 import {fetchDataWithPagination} from '../../../utils/AppUtils';
+import ErrorView from '../../common/ErrorView';
 
 const NowPlaying = () => {
   const [data, setData] = useState([]);
@@ -46,12 +47,16 @@ const NowPlaying = () => {
 
   return (
     <View style={{flex: 1}}>
-      <MovieList
-        isLoading={isLoading}
-        movieData={data}
-        onEndReachedHandler={onEndReachedHandler}
-        paginationLoader={paginationLoader}
-      />
+      {error ? (
+        <ErrorView message={error} onRetry={() => fetchNowPlayingData(1)} />
+      ) : (
+        <MovieList
+          isLoading={isLoading}
+          movieData={data}
+          onEndReachedHandler={onEndReachedHandler}
+          paginationLoader={paginationLoader}
+        />
+      )}
     </View>
   );
 };

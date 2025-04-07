@@ -31,6 +31,12 @@ export default StyleSheet.create({
   headerContent: {
     height: verticalScale(300),
   },
+  favBtn: {
+    position: 'absolute',
+    right: horizontalScale(10),
+    top: verticalScale(20),
+    zIndex: 100,
+  },
   bannerImg: {
     width: width,
     height: verticalScale(200),
