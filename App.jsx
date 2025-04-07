@@ -11,20 +11,17 @@ const App = () => {
     require('./ReactotronConfig');
   }
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
-      <GestureHandlerRootView>
-        <FavoritesProvider>
-          <AppRoutes />
-        </FavoritesProvider>
-      </GestureHandlerRootView>
-    </SafeAreaView>
+    <GestureHandlerRootView style={styles.container}>
+      <FavoritesProvider>
+        <AppRoutes />
+      </FavoritesProvider>
+    </GestureHandlerRootView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS['primary-purple-600'],
   },
 });
 

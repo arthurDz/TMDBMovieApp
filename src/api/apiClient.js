@@ -19,7 +19,6 @@ apiClient.interceptors.request.use(
       ...config.params,
       api_key: 'afb05f1dde55d5d6f2d0708bd1bc6251',
     };
-    console.log('Making request to:', Config.TMDB_BASE_URL + config.url);
     return config;
   },
   error => {

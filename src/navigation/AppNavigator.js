@@ -13,6 +13,7 @@ import {
   OutlineIcons,
 } from '../utils/Theme';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import TrendingScreen from '../screens/TrendingScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,6 +29,19 @@ const AppNavigator = () => {
             />
           ) : (
             <OutlineIcons.HomeIcon
+              size={SIZES.large}
+              color={COLORS['Neutrals/neutrals-1']}
+            />
+          );
+
+        case 'Trending':
+          return isFocused ? (
+            <SolidIcons.ArrowTrendingUpIcon
+              size={SIZES.large}
+              color={COLORS['primary-purple-600']}
+            />
+          ) : (
+            <OutlineIcons.ArrowTrendingUpIcon
               size={SIZES.large}
               color={COLORS['Neutrals/neutrals-1']}
             />
@@ -119,6 +133,13 @@ const AppNavigator = () => {
       <Tab.Screen
         name="Home"
         component={HomeNavigator}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="Trending"
+        component={TrendingScreen}
         options={{
           headerShown: false,
         }}

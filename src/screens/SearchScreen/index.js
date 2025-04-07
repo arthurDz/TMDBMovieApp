@@ -11,6 +11,7 @@ import {
 import {debounce, fetchDataWithPagination} from '../../utils/AppUtils';
 import {searchMovies} from '../../api/tmdbApi';
 import MovieList from '../../components/common/MovieList';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const SearchScreen = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -112,30 +113,34 @@ const SearchScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.searchBar}>
-        <OutlineIcons.MagnifyingGlassIcon
-          size={SIZES.large}
-          color={COLORS['Neutrals/neutrals-5']}
-        />
-        <TextInput
-          value={searchQuery}
-          onChangeText={txt => handleSearch(txt)}
-          style={styles.serachInput}
-          cursorColor={COLORS['Neutrals/neutrals-5']}
-          placeholder="Search for a movie, tv show, person...."
-          placeholderTextColor={COLORS['Neutrals/neutrals-5']}
+    <SafeAreaView
+      edges={['top']}
+      style={{flex: 1, backgroundColor: COLORS['primary-black']}}>
+      <View style={styles.container}>
+        <View style={styles.searchBar}>
+          <OutlineIcons.MagnifyingGlassIcon
+            size={SIZES.large}
+            color={COLORS['Neutrals/neutrals-5']}
+          />
+          <TextInput
+            value={searchQuery}
+            onChangeText={txt => handleSearch(txt)}
+            style={styles.serachInput}
+            cursorColor={COLORS['Neutrals/neutrals-5']}
+            placeholder="Search for a movie, tv show, person...."
+            placeholderTextColor={COLORS['Neutrals/neutrals-5']}
+          />
+        </View>
+
+        <MovieList
+          isLoading={isLoading}
+          movieData={searchResults}
+          onEndReachedHandler={onEndReachedHandler}
+          paginationLoader={paginationLoader}
+          emptyComponent={emptyComponent}
         />
       </View>
-
-      <MovieList
-        isLoading={isLoading}
-        movieData={searchResults}
-        onEndReachedHandler={onEndReachedHandler}
-        paginationLoader={paginationLoader}
-        emptyComponent={emptyComponent}
-      />
-    </View>
+    </SafeAreaView>
   );
 };
 
