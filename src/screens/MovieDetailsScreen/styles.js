@@ -15,8 +15,8 @@ export default StyleSheet.create({
     backgroundColor: COLORS['primary-black'],
   },
   header: {
-    height: verticalScale(40),
-    backgroundColor: COLORS['primary-purple-600'],
+    paddingVertical: verticalScale(20),
+    backgroundColor: 'transparent',
     padding: moderateScale(12),
     flexDirection: 'row',
     alignItems: 'center',

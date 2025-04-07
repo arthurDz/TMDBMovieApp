@@ -61,6 +61,12 @@ const MovieDetailsScreen = props => {
             />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>{movie?.original_title}</Text>
+
+          <FavoriteButton
+            movie={movie}
+            style={styles.favBtn}
+            size={SIZES.xxLarge}
+          />
         </View>
 
         <ScrollView>
@@ -69,7 +75,9 @@ const MovieDetailsScreen = props => {
               {buildImageUrl(movie?.backdrop_path, 'original') ? (
                 <FastImage
                   source={{
-                    uri: buildImageUrl(movie?.backdrop_path, 'original'),
+                    uri:
+                      buildImageUrl(movie?.backdrop_path, 'original') ||
+                      'https://fakeimg.pl/400x400?text=No+Image',
                     priority: FastImage.priority.normal,
                   }}
                   style={styles.bannerImg}
@@ -84,11 +92,6 @@ const MovieDetailsScreen = props => {
                   ]}
                 />
               )}
-              <FavoriteButton
-                movie={movie}
-                style={styles.favBtn}
-                size={SIZES.xxLarge}
-              />
               <Gradient
                 showTopGradient
                 bottomGradStyle={styles.bannerImgBottomGradient}
@@ -107,7 +110,9 @@ const MovieDetailsScreen = props => {
                 <View>
                   <FastImage
                     source={{
-                      uri: buildImageUrl(movie?.poster_path),
+                      uri:
+                        buildImageUrl(movie?.poster_path) ||
+                        'https://fakeimg.pl/400x400?text=No+Image',
                       priority: FastImage.priority.normal,
                     }}
                     style={styles.coverImg}

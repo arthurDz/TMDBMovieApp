@@ -60,7 +60,7 @@ export default MovieListCard;
 const styles = StyleSheet.create({
   card: {
     width: width / 2.2,
-    height: verticalScale(190),
+    height: verticalScale(250),
     borderRadius: moderateScale(8),
     marginHorizontal: horizontalScale(5),
   },
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(8),
   },
   bottomGradStyle: {
-    height: verticalScale(110),
+    height: verticalScale(130),
   },
   cardDetails: {
     position: 'absolute',

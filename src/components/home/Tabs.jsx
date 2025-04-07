@@ -45,7 +45,6 @@ const Tabs = () => {
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={{width: layout.width}}
-      swipeEnabled={false}
       renderTabBar={renderTabBar}
       lazy
       renderLazyPlaceholder={() => <ActivityIndicator size="large" />}
