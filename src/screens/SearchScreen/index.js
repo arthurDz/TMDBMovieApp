@@ -8,7 +8,7 @@ import {
   verticalScale,
   width,
 } from '../../utils/Theme';
-import {debounce} from '../../utils/AppUtils';
+import {debounce, fetchDataWithPagination} from '../../utils/AppUtils';
 import {searchMovies} from '../../api/tmdbApi';
 import MovieList from '../../components/common/MovieList';
 
@@ -18,12 +18,18 @@ const SearchScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [paginationLoader, setPaginationLoader] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasMoreData, setHasMoreData] = useState(true);
 
   const fetchSearchResults = async query => {
     try {
       setIsLoading(true);
       setError('');
       const data = await searchMovies(query);
+      const currentPage = data?.page;
+      const totalPages = data?.total_pages;
+
+      if (currentPage === totalPages) setHasMoreData(false);
       setSearchResults(data.results || []);
     } catch (err) {
       setError(err.message || 'Something went wrong');
@@ -33,22 +39,44 @@ const SearchScreen = () => {
     }
   };
 
+  const fetchMoreData = async page => {
+    setPaginationLoader(true);
+    try {
+      const data = await searchMovies(searchQuery, {page});
+      const currentPage = data?.page;
+      const totalPages = data?.total_pages;
+
+      setSearchResults(prevData => [...prevData, ...data.results]);
+      if (currentPage === totalPages) setHasMoreData(false);
+    } catch (error) {
+      setError(error.message);
+      console.error('Error fetching now playing movies:', error);
+    } finally {
+      setPaginationLoader(false);
+    }
+  };
+
+  const clearScreen = () => {
+    setSearchResults([]);
+    setError('');
+    setIsLoading(false);
+  };
+
   const debouncedSearch = useRef(debounce(fetchSearchResults, 300)).current;
+  const clearDebouncedSearch = useRef(debounce(clearScreen, 300)).current;
 
   useEffect(() => {
     return () => {
       debouncedSearch.cancel();
     };
-  }, [debouncedSearch]);
+  }, [debouncedSearch, clearDebouncedSearch]);
 
   const handleSearch = useCallback(
     val => {
       setSearchQuery(val);
 
       if (val.length === 0) {
-        setSearchResults([]);
-        setError('');
-        setIsLoading(false);
+        clearDebouncedSearch();
         return;
       }
 
@@ -78,7 +106,10 @@ const SearchScreen = () => {
     );
   };
 
-  const onEndReachedHandler = () => {};
+  const onEndReachedHandler = () => {
+    if (hasMoreData) setCurrentPage(currentPage + 1);
+    fetchMoreData(currentPage + 1);
+  };
 
   return (
     <View style={styles.container}>

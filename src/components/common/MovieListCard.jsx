@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {
   COLORS,
@@ -14,10 +14,15 @@ import FastImage from '@d11/react-native-fast-image';
 import {buildImageUrl} from '../../utils/imagePathBuilder';
 import Gradient from '../home/Gradient';
 import {getDate} from '../../utils/AppUtils';
+import FavoriteButton from './FavoriteButton';
+import {useNavigation} from '@react-navigation/native';
 
 const MovieListCard = ({item, index}) => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.card}>
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => navigation.navigate('MovieDetails', {movie: item})}>
       <FastImage
         source={{
           uri:
@@ -43,8 +48,10 @@ const MovieListCard = ({item, index}) => {
           {Math.floor(item?.vote_average * 10)}%
         </Text>
       </View>
+
+      <FavoriteButton movie={item} style={styles.favBtn} />
       <Gradient bottomGradStyle={styles.bottomGradStyle} />
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -102,5 +109,10 @@ const styles = StyleSheet.create({
     color: COLORS['Neutrals/neutrals-1'],
     fontWeight: '600',
     fontFamily: FONT.medium,
+  },
+  favBtn: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
   },
 });

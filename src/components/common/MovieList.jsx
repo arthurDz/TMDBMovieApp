@@ -62,7 +62,6 @@ const MovieList = ({
           )}
           initialNumToRender={10}
           maxToRenderPerBatch={11}
-          //   onScroll={handleFLScroll}
           scrollEventThrottle={16}
           contentContainerStyle={{
             flexGrow: 1,
