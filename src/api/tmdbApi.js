@@ -76,7 +76,7 @@ export const getUpcomingMovies = async (params = {}) => {
  */
 export const getMovieDetails = async (movieId, params = {}) => {
   try {
-    const requestParams = {...params};
+    const requestParams = {...params, append_to_response: 'credits'};
     return await apiClient.get(`${endpoints.movieDetails}${movieId}`, {
       params: requestParams,
     });

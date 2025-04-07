@@ -4,6 +4,14 @@ export const getDate = date => {
   return moment(date).format('MMM DD, YYYY');
 };
 
+export const formatRuntime = minutes => {
+  const duration = moment.duration(minutes, 'minutes');
+  const hours = duration.hours();
+  const mins = duration.minutes();
+
+  return `${hours}h ${mins}m`;
+};
+
 export const debounce = (func, wait) => {
   let timeout;
 
