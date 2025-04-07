@@ -20,9 +20,7 @@ const endpoints = {
  */
 export const getNowPlayingMovies = async (params = {}) => {
   try {
-    // Provide a default page=1 but allow overrides
-    const requestParams = {page: 1, ...params};
-    return await apiClient.get(endpoints.nowPlaying, {params: requestParams});
+    return await apiClient.get(endpoints.nowPlaying, {params: params});
   } catch (error) {
     console.error('Error fetching now playing movies:', error);
     throw error;

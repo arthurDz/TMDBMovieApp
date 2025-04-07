@@ -35,12 +35,12 @@ const AppNavigator = () => {
 
         case 'Search':
           return isFocused ? (
-            <SolidIcons.BookmarkIcon
+            <SolidIcons.MagnifyingGlassIcon
               size={SIZES.large}
               color={COLORS['primary-purple-600']}
             />
           ) : (
-            <OutlineIcons.BookmarkIcon
+            <OutlineIcons.MagnifyingGlassIcon
               size={SIZES.large}
               color={COLORS['Neutrals/neutrals-1']}
             />
@@ -48,12 +48,12 @@ const AppNavigator = () => {
 
         case 'Favorites':
           return isFocused ? (
-            <SolidIcons.Squares2X2Icon
+            <SolidIcons.HeartIcon
               size={SIZES.large}
               color={COLORS['primary-purple-600']}
             />
           ) : (
-            <OutlineIcons.Squares2X2Icon
+            <OutlineIcons.HeartIcon
               size={SIZES.large}
               color={COLORS['Neutrals/neutrals-1']}
             />
