@@ -16,7 +16,10 @@ const FavoriteButton = ({movie, style, size = SIZES.large}) => {
   };
 
   return (
-    <TouchableOpacity onPress={toggleFavorite} style={style}>
+    <TouchableOpacity
+      onPress={toggleFavorite}
+      style={style}
+      testID="favorite-button">
       {isFav ? (
         <SolidIcons.HeartIcon size={size} color={COLORS['primary-rose-500']} />
       ) : (
