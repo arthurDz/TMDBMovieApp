@@ -76,6 +76,50 @@ You’ve successfully set up your React Native app! 🎉
 
 ---
 
+## ✨ Features & Functionality
+
+Here's a list of key features implemented in this app:
+
+1. 🎬 **TMDB API Integration**  
+   - Fetched data using `axios` for:
+     - Now Playing
+     - Popular
+     - Top Rated
+     - Upcoming
+     - Trending Movies
+     - Search functionality across movies
+
+2. 🔁 **Infinite Scrolling**  
+   - Enabled on all screens with lists (e.g., movie categories, search results) using pagination.
+
+3. 🧱 **Modular & Clean Code Structure**  
+   - Components are well-organized and reusable with a scalable folder structure.
+
+4. 🎞️ **Trending Screen with Animation**  
+   - Custom animated carousel built using `react-native-reanimated` for smooth and performant transitions.
+
+5. 📄 **Movie Details Screen**  
+   - A rich detail view for movies that includes poster, title, runtime, release date, status, and backdrop imagery.
+
+6. ❤️ **Favorites Feature**  
+   - Users can favorite movies from any screen.
+   - Implemented using:
+     - `react-native-mmkv` for local, persistent storage
+     - React's `Context API` for global state management
+   - Favorite status is globally recognized and reflected throughout the app.
+
+7. 🧪 **Unit Testing with Jest**  
+   - Unit test cases written for:
+     - API utility functions
+     - Favorite context
+     - Debounce utility
+   - Run tests with:  
+     ```bash
+     npm test
+     ```
+
+---
+
 ## 🧠 Learn More
 
 - [React Native Docs](https://reactnative.dev)
@@ -89,4 +133,3 @@ You’ve successfully set up your React Native app! 🎉
 ## 🛠 Troubleshooting
 
 Having issues? Check out the official [Troubleshooting Guide](https://reactnative.dev/docs/troubleshooting).
-
